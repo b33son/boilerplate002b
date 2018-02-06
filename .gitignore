@@ -1,0 +1,11 @@
+# Dependency directory
+node_modules
+
+# Merge backup files
+*.orig
+
+# Build folder
+build
+
+# Jest test coverage reports
+coverage

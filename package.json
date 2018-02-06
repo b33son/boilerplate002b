@@ -1,0 +1,132 @@
+{
+  "name": "react-redux-boilerplate",
+  "version": "0.0.1",
+  "description": "Talkdesk Boilerplate React application with Redux",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Talkdesk/react-redux-boilerplate.git"
+  },
+  "engines": {
+    "node": ">=7",
+    "yarn": "^0.27 || ^1.0"
+  },
+  "author": "Talkdesk",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "yarn run test && yarn run clean",
+    "prebuild:debug": "yarn prebuild",
+    "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p",
+    "build:debug": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --devtool eval-source-map",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "start": "yarn run start:development",
+    "start:generic": "cross-env NODE_ENV=development APP=myapp node server",
+    "start:development": "cross-env RELEASE_STAGE=development yarn run start:generic",
+    "start:staging": "cross-env RELEASE_STAGE=staging yarn run start:generic",
+    "start:qa": "cross-env RELEASE_STAGE=qa yarn run start:generic",
+    "start:production": "cross-env RELEASE_STAGE=production yarn run start:generic",
+    "clean": "rimraf ./build/*",
+    "pretest": "yarn run lint",
+    "lint": "eslint --ext .js src server showcase",
+    "test": "jest",
+    "test:changes": "yarn run test -- -o",
+    "test:spec": "yarn run test -- -t",
+    "test:watch": "yarn run test -- --watch",
+    "test:watchAll": "yarn run test -- --watchAll",
+    "test:coverage": "yarn run test -- --coverage"
+  },
+  "babel": {
+    "presets": [
+      "latest",
+      "react",
+      "stage-1"
+    ],
+    "env": {
+      "production": {
+        "only": [
+          "src"
+        ]
+      }
+    }
+  },
+  "dependencies": {
+    "babel-runtime": "^6.25.0",
+    "classnames": "^2.2.5",
+    "is-plain-object": "^2.0.4",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "@storybook/addon-centered": "^3.2.0",
+    "@storybook/react": "^3.2.3",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "case-sensitive-paths-webpack-plugin": "^2.1.1",
+    "chalk": "^2.1.0",
+    "compression": "^1.7.0",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.4",
+    "duplicate-package-checker-webpack-plugin": "^1.2.5",
+    "ejs": "^2.5.7",
+    "enzyme": "^2.9.1",
+    "eslint": "^4.1.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.2.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "exports-loader": "^0.6.4",
+    "express": "^4.15.4",
+    "file-loader": "^0.11.2",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "jest": "^20.0.4",
+    "jsdom": "^11.1.0",
+    "json-loader": "^0.5.7",
+    "minimist": "^1.2.0",
+    "null-loader": "^0.1.1",
+    "react-test-renderer": "^15.6.1",
+    "rimraf": "^2.6.1",
+    "style-loader": "^0.18.2",
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.5.3",
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-hot-middleware": "^2.18.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "jest": true
+    },
+    "globals": {
+      "__APP_VERSION__": true
+    },
+    "extends": [
+      "standard",
+      "standard-react",
+      "plugin:promise/recommended",
+      "plugin:react/recommended"
+    ],
+    "rules": {
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "no-unused-expressions": "off"
+    }
+  }
+}
